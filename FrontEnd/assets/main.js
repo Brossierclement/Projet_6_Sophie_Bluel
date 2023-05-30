@@ -108,3 +108,6 @@ async function categoriesAffichage() {
 }
 
 categoriesAffichage()
+
+let token = localStorage.getItem("token");
+console.log(token)

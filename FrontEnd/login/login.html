@@ -12,36 +12,46 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="login.css" />
+    <script src="login.js" defer></script>
   </head>
   <body>
     <header>
-      <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+      <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
           <li>projets</li>
           <li>contact</li>
           <li>login</li>
-          <li><img src="/FrontEnd/assets/icons/instagram.png" alt="Instagram" /></li>
+          <li>
+            <img
+              src="/Portfolio-architecte-sophie-bluel/FrontEnd/assets/icons/instagram.png"
+              alt="Instagram"
+            />
+          </li>
         </ul>
       </nav>
     </header>
     <main>
       <section class="login">
         <h2>Log In</h2>
-        <div class="resize">
-          <p class="paragraph">E-mail</p>
-          <input class="input" type="url" name="" id="" />
-        </div>
-        <div class="resize">
-          <p class="paragraph">Mot de passe</p>
-          <input class="input" type="password" name="" id="" />
-        </div>
-        <div>
-          <button class="connection">Se connecter</button>
-        </div>
-        <div>
-          <a href="">Mot de passe oublié</a>
-        </div>
+        <form class="formulaire">
+          <div class="resize">
+            <p class="paragraph">E-mail</p>
+            <input class="input" id="email" type="email" />
+            <p class="alerteEmail"></p>
+          </div>
+          <div class="resize">
+            <p class="paragraph">Mot de passe</p>
+            <input class="input" id="motDePasse" type="password" />
+            <p class="alerteMotDePasse"></p>
+          </div>
+          <div>
+            <button class="connexion" type="submit">Se connecter</button>
+          </div>
+          <div>
+            <a href="">Mot de passe oublié</a>
+          </div>
+        </form>
       </section>
     </main>
     <footer>

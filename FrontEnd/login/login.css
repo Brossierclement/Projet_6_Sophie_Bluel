@@ -98,10 +98,6 @@ main {
     justify-content: center;
 }
 
-.resize {
-    width: 50%;
-}
-
 .login {
     align-items: center;
     display: flex;
@@ -110,12 +106,31 @@ main {
     width: 70%;
 }
 
-.connection {
+.formulaire {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	width: 100%;
+}
+
+.resize {
+    width: 50%;
+}
+
+.connexion {
     background: #1D6154;
     border-radius: 15px;
     border: none;
     color: white;
+	cursor: pointer;
     height: 35px;
+	scale: 1;
+	transition: scale 0.1s ease-in-out;
+}
+
+.connexion:active {
+	scale: 0.9;
 }
 
 .paragraph {
@@ -125,6 +140,14 @@ main {
 .input {
     height: 35px;
     width: 100%;
+}
+
+.alerteEmail,
+.alerteMotDePasse {
+	color: lightcoral;
+	font-size: 12.5px;
+	margin-top: 5px;
+	text-align: center;
 }
 
 @media (max-width: 600px) {
