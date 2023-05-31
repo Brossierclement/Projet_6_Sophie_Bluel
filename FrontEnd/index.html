@@ -15,25 +15,34 @@
     <script src="assets/main.js" defer></script>
   </head>
   <body>
+    <div class="modeEdition">
+      <img src="assets/icons/editer.png" alt="icône d'édition" />
+      <p>Mode édition</p>
+      <button>publier les changements</button>
+    </div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-      <nav>
-        <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>
-            <a href="login/login.html">Login</a>
-          </li>
-          <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-        </ul>
+      <nav class="listeNavigation">
+        <a href="">projets</a>
+        <a href="">contact</a>
+        <a id="login" href="login/login.html">Login</a>
+        <img class="logoInstagram" src="./assets/icons/instagram.png" alt="Instagram" />
       </nav>
     </header>
     <main>
       <section id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="" />
+          <button class="modificationImageProfile">
+            <img src="assets/icons/editer.png" alt="" />
+            modifier
+          </button>
         </figure>
-        <article>
+        <article class="descriptionSophieBluel">
+          <button class="modificationTexteIntroduction">
+            <img src="assets/icons/editer.png" alt="" />
+            modifier
+          </button>
           <h2>Designer d'espace</h2>
           <p>
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à
@@ -52,7 +61,15 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="conteneurTitreEtModificationProjets">
+          <section class="titreEtModificationProjets">
+            <h2>Mes Projets</h2>
+            <button class="modificationImageProjets">
+              <img src="assets/icons/editer.png" alt="" />
+              modifier
+            </button>
+          </section>
+        </div>
         <div class="category"></div>
         <div class="gallery"></div>
       </section>

@@ -123,7 +123,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -186,7 +185,19 @@ footer nav ul {
 	margin: 2em
 }
 
-/* Ma partie */
+/* !!! MON CODE COMMENCE ICI !!! */
+
+/* Sommaire : */
+/* - ligne : PARAMETRES GENERIQUES */
+/* - ligne : PARAMETRES PRECIS */
+/* - ligne : Bandeau "Mode édition" */
+/* - ligne : Liens de navigation */
+/* - ligne : Liens de navigation  */
+/* - ligne : Description de Sophie Bluel */
+/* - ligne : Titre "Mes projets" et modificateur */
+/* - ligne : Boutons des catégories */
+
+/* ////////// PARAMETRES GENERIQUES ////////// */
 
 a {
 	text-decoration: none;
@@ -197,9 +208,170 @@ a:hover {
 	color: #B1663C;
 }
 
+main {
+	margin-left: 85px;
+    margin-right: 85px;
+}
+
+/* ////////// PARAMETRES PRECIS */
+
+/* ----- Bandeau "Mode édition" ----- */
+.modeEdition {
+	align-items: center;
+	background-color: black;
+	display: none;
+	gap: 10px;
+	justify-content: center;
+	padding: 10px 0px 10px 0px;
+}
+
+.modeEdition img {
+	filter: invert(1);
+	width: 25px;
+}
+
+.modeEdition p {
+	color: white;
+}
+
+.modeEdition button {
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+	font-family: 'Work Sans' ;
+	padding: 10px 15px 10px 15px;
+	transition: scale 0.1s ease-in-out;
+}
+
+.modeEdition button:hover {
+	scale: 1.05;
+}
+
+.modeEdition button:active {
+	scale: 0.9;
+}
+
+/* ----- Liens de navigation ----- */
+.listeNavigation {
+	align-items: center;
+	display: flex;
+	font-size: 16px;
+	gap: 35px;
+}
+
+.logoInstagram {
+	height: 20px;
+}
+
+/* ----- Image de profil ----- */
+#introduction img {
+	margin: 0;
+}
+
+.modificationImageProfile {
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: none;
+	font-family: 'Work Sans' ;
+	gap: 10px;
+	padding: 5px 0px 0px 0px;
+	transition: scale 0.1s ease-in-out;
+	width: auto;
+}
+
+.modificationImageProfile:hover {
+	scale: 1.05;
+}
+
+.modificationImageProfile:active {
+	scale: 0.9;
+}
+
+.modificationImageProfile img {
+	height: 15px;
+}
+
+/* ----- Description de Sophie Bluel ----- */
+.descriptionSophieBluel {
+	margin-bottom: 20px;
+}
+
+.modificationTexteIntroduction {
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: none;
+	font-family: 'Work Sans' ;
+	gap: 10px;
+	padding: 5px 0px 25px 0px;
+	transition: scale 0.1s ease-in-out;
+	width: auto;
+}
+
+.modificationTexteIntroduction:hover {
+	scale: 1.05;
+}
+
+.modificationTexteIntroduction:active {
+	scale: 0.9;
+}
+
+.modificationTexteIntroduction img {
+	height: 15px;
+}
+
+/* ----- Titre "Mes projets" et modificateur ----- */
+.conteneurTitreEtModificationProjets {
+	display: flex;
+	justify-content: center;
+}
+
+.titreEtModificationProjets {
+	align-items: center;
+	display: flex;
+}
+
+.titreEtModificationProjets h2 {
+	margin-left: 25%;
+	width: 295px;
+}
+
+.titreEtModificationProjets button {
+	padding-left: 30px;
+}
+
+.modificationImageProjets {
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: none;
+	font-family: 'Work Sans' ;
+	gap: 10px;
+	padding: 0px 0px 0px 0px;
+	transition: scale 0.1s ease-in-out;
+	width: auto;
+}
+
+.modificationImageProjets:hover {
+	scale: 1.05;
+}
+
+.modificationImageProjets:active {
+	scale: 0.9;
+}
+
+.modificationImageProjets img {
+	height: 15px;
+}
+
+/* ----- Boutons des catégories ----- */
 .category {
 	display: flex;
-	gap: 5px;
+	gap: 15px;
 	justify-content: center;
 	margin-bottom: 35px;
 }
@@ -209,8 +381,15 @@ a:hover {
 	border: none;
 	border-radius: 15px;
 	color: white;
+	cursor: pointer;
 	padding: 5px 20px 5px 20px;
 	font-weight: 700;
+	font-size: 16px;
+	transition: scale 0.5s ease-in-out;
+}
+
+.classBoutonTous:hover {
+	scale: 1.05;
 }
 
 .classBoutonCategories {
@@ -218,6 +397,13 @@ a:hover {
 	border: 1px solid #1D6154;
 	border-radius: 15px;
 	color: #1D6154;
+	cursor: pointer;
 	padding: 5px 20px 5px 20px;
 	font-weight: 700;
+	font-size: 16px;
+	transition: scale 0.5s ease-in-out;
+}
+
+.classBoutonCategories:hover {
+	scale: 1.05;
 }

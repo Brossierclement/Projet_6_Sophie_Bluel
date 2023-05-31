@@ -38,9 +38,9 @@ function verificationDesIdentifiants() {
             alert("Vous êtes connecté !")
 
             let ChangementEtatToken = JSON.stringify(contenu)
-            localStorage.setItem("token", ChangementEtatToken);
+            sessionStorage.setItem("token", ChangementEtatToken);
 
-            let stockageToken = localStorage.getItem("token")
+            let stockageToken = sessionStorage.getItem("token")
 
             let recuperationToken = JSON.parse(stockageToken)
             console.log(stockageToken)

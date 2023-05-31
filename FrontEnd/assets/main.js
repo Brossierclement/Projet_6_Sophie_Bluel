@@ -109,5 +109,29 @@ async function categoriesAffichage() {
 
 categoriesAffichage()
 
-let token = localStorage.getItem("token");
-console.log(token)
+function vérifierToken() {
+
+    let token = sessionStorage.getItem("token");
+    console.log(token)
+  
+    if (token) {
+        const login = document.getElementById("login")
+        login.innerText = "Déconnexion"
+
+        const modeEdition = document.querySelector(".modeEdition")
+        const modificationImageProfile = document.querySelector(".modificationImageProfile")
+        const modificationTexteIntroduction = document.querySelector(".modificationTexteIntroduction")
+        const modificationImageProjets = document.querySelector(".modificationImageProjets")
+
+        modeEdition.style.display = "flex"
+        modificationImageProfile.style.display = "flex"
+        modificationTexteIntroduction.style.display = "flex"
+        modificationImageProjets.style.display = "flex"
+        
+      console.log("Le token est valide !");
+    } else {
+      console.log("Le token est invalide ou n'existe pas !");
+    }
+}
+
+vérifierToken()
