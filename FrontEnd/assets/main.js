@@ -116,7 +116,18 @@ function vérifierToken() {
   
     if (token) {
         const login = document.getElementById("login")
-        login.innerText = "Déconnexion"
+        const deconnexion = document.createElement("a")
+        deconnexion.innerText = "Déconnexion";
+        deconnexion.setAttribute("class", "deconnexion");
+        deconnexion.setAttribute("style", "cursor: pointer")
+        login.parentNode.replaceChild(deconnexion, login);
+
+        deconnexion.addEventListener('click', function() {
+            if (deconnexion) {
+                sessionStorage.removeItem("token")
+                location.reload();
+            }
+        })
 
         const modeEdition = document.querySelector(".modeEdition")
         const modificationImageProfile = document.querySelector(".modificationImageProfile")
@@ -127,7 +138,7 @@ function vérifierToken() {
         modificationImageProfile.style.display = "flex"
         modificationTexteIntroduction.style.display = "flex"
         modificationImageProjets.style.display = "flex"
-        
+
       console.log("Le token est valide !");
     } else {
       console.log("Le token est invalide ou n'existe pas !");
@@ -135,3 +146,25 @@ function vérifierToken() {
 }
 
 vérifierToken()
+
+function ouvertureModaleMesProjets() {
+    let boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
+
+    boutonModifierMesProjets.addEventListener('click', function() {
+        document.querySelector('.arrierePlanGris').style.display = 'block'
+        document.querySelector(".modaleMesProjets").style.display = 'block'
+    })
+}
+
+ouvertureModaleMesProjets()
+
+function fermetureModaleMesProjets() {
+    let croixDeFermetureMesProjets = document.querySelector(".mesProjetsFermeture")
+
+    croixDeFermetureMesProjets.addEventListener('click', function(){
+        document.querySelector(".arrierePlanGris").style.display = 'none'
+        document.querySelector(".modaleMesProjets").style.display = 'none'
+    })
+}
+
+fermetureModaleMesProjets()

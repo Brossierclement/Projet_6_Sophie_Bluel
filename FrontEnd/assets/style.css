@@ -335,12 +335,8 @@ main {
 }
 
 .titreEtModificationProjets h2 {
-	margin-left: 25%;
+	/* margin-left: 25%; */
 	width: 295px;
-}
-
-.titreEtModificationProjets button {
-	padding-left: 30px;
 }
 
 .modificationImageProjets {
@@ -367,6 +363,55 @@ main {
 .modificationImageProjets img {
 	height: 15px;
 }
+
+/* ----- Modale Mes Projets */
+
+.arrierePlanGris {
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	height: 100vh;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+}
+
+.modaleMesProjets {
+	background-color: white;
+	border-radius: 3px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	height: 400px;
+	display: none;
+	padding: 20px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 600px;
+}
+
+.modaleMesProjetsOuverte {
+	display: block;
+}
+
+.mesProjetsFermeture {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	right: 8px;
+	transition: 0.3s ease-in-out;
+	top: 8px;
+}
+
+.mesProjetsFermeture img {
+	height: 25px;
+}
+
+.mesProjetsFermeture:hover {
+	transform: scale(1.8);
+}
+
 
 /* ----- Boutons des catégories ----- */
 .category {
