@@ -9,21 +9,8 @@ async function recuperationImages() {
     return await reponse.json();
 }
 
-// async function recuperationImages(callback) {
-//     const reponse = await fetch("http://localhost:5678/api/works");
-//     const resultat = await reponse.json();
-//     callback(resultat);
-// }
-
-// recuperationImages(exemple)
-// function exemple(donnees) {
-//     console.log(donnees)
-//     images = donnees;
-//     galerieImages()
-// }
-
-function galerieImages() {
-    const galerie = document.querySelector(".gallery");
+function galerieImages(emplacementGallery) {
+    const galerie = document.querySelector(emplacementGallery);
     galerie.replaceChildren();
     for (imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
         // Récupére l'objet à l'index "imagesIndex" dans la liste image.
@@ -49,13 +36,13 @@ function galerieImages() {
     }
 }
 
-async function updateGallery() {
+async function updateGallery(emplacementGallery) {
     images = await recuperationImages()
     imagesCourantes = images;
-    galerieImages()
+    galerieImages(emplacementGallery)
 }
 
-updateGallery();
+updateGallery(".gallery");
 
 // -------------------------------------------------------------------------
 
@@ -64,7 +51,7 @@ async function recuperationCategories() {
     return await reponse.json();
 }
 
-function filtrage(categorie) {
+function filtrage(categorie, emplacementGallery) {
     let imagesTemporaires = [];
     let categorieIndex = 0;
     for (categorieIndex = 0; categorieIndex < images.length; categorieIndex++) {
@@ -75,10 +62,10 @@ function filtrage(categorie) {
     }
     imagesCourantes = imagesTemporaires;
     console.log(imagesTemporaires);
-    galerieImages()
+    galerieImages(emplacementGallery)
 }
 
-async function categoriesAffichage() {
+async function categoriesAffichage(emplacementGallery) {
     const conteneurCategories = document.querySelector(".category");
     const categories = await recuperationCategories();
     let categoriesIndex = 0;
@@ -89,7 +76,7 @@ async function categoriesAffichage() {
 
     boutonTous.addEventListener('click', function() {
         imagesCourantes = images;
-        galerieImages()
+        galerieImages(emplacementGallery)
     })
 
     for (categoriesIndex = 0; categoriesIndex < categories.length; categoriesIndex++) {
@@ -102,12 +89,14 @@ async function categoriesAffichage() {
         console.log(boutonCategories);
 
         boutonCategories.addEventListener('click', function() {
-            filtrage(element['name']);
+            filtrage(element['name'], emplacementGallery);
         })
     }
 }
 
-categoriesAffichage()
+categoriesAffichage(".gallery")
+
+// -------------------------------------------------------------------------
 
 function vérifierToken() {
 
@@ -146,25 +135,51 @@ function vérifierToken() {
 }
 
 vérifierToken()
+// -------------------------------------------------------------------------
+
+function supprimerCategories() {
+
+    let token = sessionStorage.getItem("token");
+
+    if (token) {
+        const categories = document.querySelector(".category")
+        categories.style.display = "none"
+    }
+}
+
+supprimerCategories()
+
+// -------------------------------------------------------------------------
 
 function ouvertureModaleMesProjets() {
     let boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
 
     boutonModifierMesProjets.addEventListener('click', function() {
-        document.querySelector('.arrierePlanGris').style.display = 'block'
-        document.querySelector(".modaleMesProjets").style.display = 'block'
-    })
-}
+        const arrierePlanGris = document.querySelector(".arrierePlanGris")
+        const modaleMesProjets = document.querySelector(".modaleMesProjets")
+        if (!arrierePlanGris.classList.contains("modaleMesProjetsOuverte") || !modaleMesProjets.classList.contains("modaleMesProjetsOuverte")) {
+            arrierePlanGris.classList.add('modaleMesProjetsOuverte')
+            modaleMesProjets.classList.add('modaleMesProjetsOuverte')
+        }
+        }
+    )}
 
 ouvertureModaleMesProjets()
 
-function fermetureModaleMesProjets() {
-    let croixDeFermetureMesProjets = document.querySelector(".mesProjetsFermeture")
+updateGallery(".mesProjetsBody")
 
+function fermetureModalesMesProjets() {
+
+    const croixDeFermetureMesProjets = document.querySelector(".mesProjetsFermeture")
+    const arrierePlanGris = document.querySelector(".arrierePlanGris");
+    const modaleMesProjets = document.querySelector(".modaleMesProjets");
+    
     croixDeFermetureMesProjets.addEventListener('click', function(){
-        document.querySelector(".arrierePlanGris").style.display = 'none'
-        document.querySelector(".modaleMesProjets").style.display = 'none'
+        arrierePlanGris.classList.remove('modaleMesProjetsOuverte')
+        modaleMesProjets.classList.remove('modaleMesProjetsOuverte')
     })
 }
 
-fermetureModaleMesProjets()
+fermetureModalesMesProjets()
+
+// -------------------------------------------------------------------------
