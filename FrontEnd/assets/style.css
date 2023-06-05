@@ -366,7 +366,7 @@ main {
 	height: 15px;
 }
 
-/* ----- Modale Mes Projets */
+/* ----- Modale Mes Projets ----- */
 
 .arrierePlanGris {
 	animation: arriereGrisonnant 0.5s ease-in-out alternate;
@@ -388,7 +388,7 @@ main {
 	}
 }
 
-.modaleMesProjets {
+.apparenceModales {
 	animation: modaleOuverture 0.5s;
 	background-color: white;
 	border-radius: 10px;
@@ -414,13 +414,13 @@ main {
 	}
 }
 
-.modaleMesProjetsOuverte {
+.ouvertureModales {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
 }
 
-.mesProjetsFermeture {
+.croixFermetureModales {
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
@@ -430,11 +430,11 @@ main {
 	top: 8px;
 }
 
-.mesProjetsFermeture img {
+.croixFermetureModales img {
 	height: 25px;
 }
 
-.mesProjetsFermeture:hover {
+.croixFermetureModales:hover {
 	transform: scale(1.8);
 }
 
@@ -498,6 +498,10 @@ main {
 .boutonSupprimer:active {
 	scale: 0.9;
 }
+
+/* ----- Modale Ajouter Images ----- */
+
+
 
 /* ----- Boutons des catégories ----- */
 .category {

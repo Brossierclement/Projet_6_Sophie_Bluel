@@ -151,35 +151,28 @@ supprimerCategories()
 
 // -------------------------------------------------------------------------
 
-function ouvertureModaleMesProjets() {
+function ouvertureEtFermetureModaleMesProjets() {
     let boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
+    const arrierePlanGris = document.querySelector(".arrierePlanGris")
+    const modaleMesProjets = document.querySelector(".apparenceModales")
 
     boutonModifierMesProjets.addEventListener('click', function() {
-        const arrierePlanGris = document.querySelector(".arrierePlanGris")
-        const modaleMesProjets = document.querySelector(".modaleMesProjets")
-        if (!arrierePlanGris.classList.contains("modaleMesProjetsOuverte") || !modaleMesProjets.classList.contains("modaleMesProjetsOuverte")) {
-            arrierePlanGris.classList.add('modaleMesProjetsOuverte')
-            modaleMesProjets.classList.add('modaleMesProjetsOuverte')
+        if (!arrierePlanGris.classList.contains("ouvertureModales") || !modaleMesProjets.classList.contains("modaleMesProjetsOuverte")) {
+            arrierePlanGris.classList.toggle('ouvertureModales')
+            modaleMesProjets.classList.toggle('ouvertureModales')
         }
         }
-    )}
-
-ouvertureModaleMesProjets()
-
-updateGallery(".mesProjetsBody")
-
-function fermetureModalesMesProjets() {
-
-    const croixDeFermetureMesProjets = document.querySelector(".mesProjetsFermeture")
-    const arrierePlanGris = document.querySelector(".arrierePlanGris");
-    const modaleMesProjets = document.querySelector(".modaleMesProjets");
+    )
+    const croixDeFermetureMesProjets = document.querySelector(".croixFermetureModales")
     
     croixDeFermetureMesProjets.addEventListener('click', function(){
-        arrierePlanGris.classList.remove('modaleMesProjetsOuverte')
-        modaleMesProjets.classList.remove('modaleMesProjetsOuverte')
+        arrierePlanGris.classList.toggle('ouvertureModales')
+        modaleMesProjets.classList.toggle('ouvertureModales')
     })
 }
 
-fermetureModalesMesProjets()
+ouvertureEtFermetureModaleMesProjets()
+
+updateGallery(".mesProjetsBody")
 
 // -------------------------------------------------------------------------
