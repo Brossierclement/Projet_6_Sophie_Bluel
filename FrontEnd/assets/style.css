@@ -420,6 +420,24 @@ main {
 	flex-direction: column;
 }
 
+.flecheRetour {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	left: 8px;
+	transition: 0.3s ease-in-out;
+	top: 8px;
+}
+
+.flecheRetour img {
+	height: 25px;
+}
+
+.flecheRetour:hover {
+	transform: scale(1.3);
+}
+
 .croixFermetureModales {
 	background-color: transparent;
 	border: none;
@@ -501,8 +519,25 @@ main {
 
 /* ----- Modale Ajouter Images ----- */
 
+.AjouterImagesHeader h3 {
+	font-size: 26px;
+}
 
+.ajouteTonImage {
+	align-items: center;
+	background-color:#E8F1F6;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	height: 170px;
+	width: 420px;
+}
 
+.saisirImage {
+	background-color: #CBD6DC;
+}
 /* ----- Boutons des catégories ----- */
 .category {
 	display: flex;

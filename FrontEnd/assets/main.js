@@ -152,9 +152,9 @@ supprimerCategories()
 // -------------------------------------------------------------------------
 
 function ouvertureEtFermetureModaleMesProjets() {
-    let boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
+    const boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
     const arrierePlanGris = document.querySelector(".arrierePlanGris")
-    const modaleMesProjets = document.querySelector(".apparenceModales")
+    const modaleMesProjets = document.getElementById("modaleMesProjets")
 
     boutonModifierMesProjets.addEventListener('click', function() {
         if (!arrierePlanGris.classList.contains("ouvertureModales") || !modaleMesProjets.classList.contains("modaleMesProjetsOuverte")) {
@@ -173,6 +173,70 @@ function ouvertureEtFermetureModaleMesProjets() {
 
 ouvertureEtFermetureModaleMesProjets()
 
-updateGallery(".mesProjetsBody")
+// updateGallery(".mesProjetsBody")
+
+function galerieImagesModale(emplacementGallery) {
+    const galerie = document.querySelector(emplacementGallery);
+    galerie.replaceChildren();
+    for (imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
+        // Récupére l'objet à l'index "imagesIndex" dans la liste image.
+        const element=imagesCourantes[imagesIndex];
+
+        const figure = document.createElement("figure");
+        figure.setAttribute("class", "classeFigure");
+        galerie.appendChild(figure);
+
+        const img = document.createElement("img");
+        img.setAttribute("class", "classeImg");
+        img.src = element["imageUrl"];
+        figure.appendChild(img);
+
+        const figCaption = document.createElement("figcaption");
+        figCaption.setAttribute("class", "classeFigCaption");
+        figure.appendChild(figCaption);
+
+        const titre = document.createElement("p");
+        titre.setAttribute("class", "classTitre");
+        titre.innerText = element["title"];
+        figure.appendChild(titre);
+    }
+}
+
+async function updateGalleryModale(emplacementGallery) {
+    images = await recuperationImages()
+    imagesCourantes = images;
+    galerieImagesModale(emplacementGallery)
+}
+
+updateGalleryModale(".mesProjetsBody");
 
 // -------------------------------------------------------------------------
+
+function ouvertureEtFermetureModaleAjouterImages() {
+    const boutonAjouter = document.querySelector(".boutonAjouter");
+    const arrierePlanGris = document.querySelector(".arrierePlanGris")
+    const modaleAjouterImages = document.getElementById("modaleAjouterImages");
+    const modaleMesProjets = document.getElementById("modaleMesProjets")
+    const croixDeFermetureAjouterImages = modaleAjouterImages.querySelector(".croixFermetureModales");
+  
+    boutonAjouter.addEventListener('click', function() {
+      if (!modaleAjouterImages.classList.contains("ouvertureModales")) {
+        modaleAjouterImages.classList.toggle("ouvertureModales");
+        modaleMesProjets.classList.toggle("ouvertureModales")
+      }
+    });
+  
+    croixDeFermetureAjouterImages.addEventListener('click', function() {
+      modaleAjouterImages.classList.toggle('ouvertureModales');
+      arrierePlanGris.classList.toggle("ouvertureModales")
+    });
+
+    const flecheRetour = document.querySelector(".flecheRetour")
+
+    flecheRetour.addEventListener('click', function() {
+        modaleAjouterImages.classList.toggle("ouvertureModales")
+        modaleMesProjets.classList.toggle("ouvertureModales")
+    })
+  }
+  
+  ouvertureEtFermetureModaleAjouterImages();

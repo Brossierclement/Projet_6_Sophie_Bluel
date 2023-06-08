@@ -16,8 +16,8 @@
   </head>
   <body>
     <div class="arrierePlanGris"></div>
-
-    <div class="apparenceModales">
+    <!-- Modale mes projets -->
+    <div id="modaleMesProjets" class="apparenceModales">
       <button class="croixFermetureModales">
         <img src="assets/icons/fermer.png" alt="" />
       </button>
@@ -32,7 +32,10 @@
     </div>
 
     <!-- Modale ajouter images -->
-    <div class="apparenceModales">
+    <div id="modaleAjouterImages" class="apparenceModales">
+      <button class="flecheRetour">
+        <img src="assets/icons/fleche-gauche.png" alt="" />
+      </button>
       <button class="croixFermetureModales">
         <img src="assets/icons/fermer.png" alt="" />
       </button>
@@ -40,12 +43,16 @@
         <h3>Ajout photo(s)</h3>
       </section>
       <div class="AjouterImagesBody">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div class="ajouteTonImage">
+          <img src="" alt="" />
+          <input type="file" class="saisirImage" />
+          <p>jpg. png : 4mo max</p>
+        </div>
+        <div class="leTitreDeTonImage"></div>
+        <div class="laCategorieDeTonImage"></div>
       </div>
       <div class="AjouterImagesFooter">
-        <button class="boutonAjouter">Valider</button>
+        <button class="boutonValider">Valider</button>
       </div>
     </div>
 
