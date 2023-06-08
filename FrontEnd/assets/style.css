@@ -393,14 +393,14 @@ main {
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-	height: 730px;
+	max-height: 80%;
 	display: none;
 	padding: 20px;
 	position: fixed;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 600px;
+	width: 40%;
 }
 
 @keyframes modaleOuverture {
@@ -483,6 +483,30 @@ main {
 	width: 100%;
 }
 
+.conteneurImages {
+	position: relative;
+	display: inline-block;
+}
+
+.supprimerPhoto {
+	align-items: center;
+	background-color: black;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	padding: 5px;
+	position: absolute;
+	right: 5px;
+	text-decoration: none;
+	top: 5px;
+	z-index: 1;
+}
+
+.supprimerPhoto img {
+	width: 20px;
+	filter: invert(100%);
+}
+
 .mesProjetsFooter {
 	display: flex;
 	flex-direction: column;
@@ -523,21 +547,104 @@ main {
 	font-size: 26px;
 }
 
+.AjouterImagesBody {
+	border-bottom: 1px solid #CBD6DC;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	height: 70%;
+	padding-bottom: 50px;
+	width: 90%;
+}
+
 .ajouteTonImage {
 	align-items: center;
 	background-color:#E8F1F6;
-	border-radius: 10px;
+	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+	height: auto;
 	justify-content: center;
-	height: 170px;
-	width: 420px;
+	padding: 10px 0px 10px 0px;
+	width: 100%;
+}
+
+#defaultImage {
+	filter: contrast(10%);
+	max-width: 20%;
+	opacity: 0.5;
+}
+
+#previewImage {
+	width: 40%;
+}
+
+.personnalisationInputImage {
+	background-color: #CBD6DC;
+	border: none;
+	border-radius: 50px;
+	color: #306685;
+	cursor: pointer;
+	display: inline-block;
+	padding: 10px 40px;
+	transition: 0.25s ease-in-out;
+}
+
+.personnalisationInputImage:hover {
+	scale: 1.05;
+}
+
+.saisirImage {
+	display: none;
 }
 
 .saisirImage {
 	background-color: #CBD6DC;
+	width: 90%;
 }
+
+.leTitreDeTonImage h4 {
+	margin-bottom: 10px;
+}
+
+.leTitreDeTonImage input {
+	border: none;
+	box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
+	font-family: 'Work Sans' ;
+	font-size: 17px;
+	height: 85%;
+	padding: 0;
+	width: 100%;
+}
+
+.laCategorieDeTonImage h4 {
+	margin-bottom: 10px;
+}
+
+.laCategorieDeTonImage select {
+	border: none;
+	box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.1);
+	font-family: 'Work Sans' ;
+	font-size: 17px;
+	height: 85%;
+	width: 100%;
+}
+
+.AjouterImagesFooter {
+	margin-top: 30px;
+}
+
+.boutonValider {
+	background-color: #A7A7A7;
+	border: none;
+	border-radius: 60px;
+	color: white;
+	cursor: pointer;
+	font-family: 'Work Sans' ;
+	padding: 10px 75px 10px 75px;
+}
+
 /* ----- Boutons des catégories ----- */
 .category {
 	display: flex;

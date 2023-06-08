@@ -44,12 +44,20 @@
       </section>
       <div class="AjouterImagesBody">
         <div class="ajouteTonImage">
-          <img src="" alt="" />
-          <input type="file" class="saisirImage" />
-          <p>jpg. png : 4mo max</p>
+          <img src="assets/icons/image.png" alt="" id="defaultImage" />
+          <img src="" alt="" id="previewImage" style="display: none" />
+          <label for="file" class="personnalisationInputImage">+ Ajouter photo</label>
+          <input type="file" id="file" class="saisirImage" />
+          <p class="precisionPoids">jpg. png : 4mo max</p>
         </div>
-        <div class="leTitreDeTonImage"></div>
-        <div class="laCategorieDeTonImage"></div>
+        <div class="leTitreDeTonImage">
+          <h4>Titre</h4>
+          <input id="ajouteTonTitre" type="text" />
+        </div>
+        <div class="laCategorieDeTonImage">
+          <h4>Catégorie</h4>
+          <select id="menuDeroulantCategories"></select>
+        </div>
       </div>
       <div class="AjouterImagesFooter">
         <button class="boutonValider">Valider</button>

@@ -173,23 +173,35 @@ function ouvertureEtFermetureModaleMesProjets() {
 
 ouvertureEtFermetureModaleMesProjets()
 
-// updateGallery(".mesProjetsBody")
+// -------------------------------------------------------------------------
 
 function galerieImagesModale(emplacementGallery) {
     const galerie = document.querySelector(emplacementGallery);
     galerie.replaceChildren();
-    for (imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
-        // Récupére l'objet à l'index "imagesIndex" dans la liste image.
-        const element=imagesCourantes[imagesIndex];
+    for (let imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
+        const element = imagesCourantes[imagesIndex];
 
         const figure = document.createElement("figure");
         figure.setAttribute("class", "classeFigure");
         galerie.appendChild(figure);
 
+        const conteneurImages = document.createElement("div");
+        conteneurImages.setAttribute("class", "conteneurImages");
+        figure.appendChild(conteneurImages);
+
         const img = document.createElement("img");
         img.setAttribute("class", "classeImg");
         img.src = element["imageUrl"];
-        figure.appendChild(img);
+        conteneurImages.appendChild(img);
+
+        const supprimerPhoto = document.createElement("button");
+        supprimerPhoto.setAttribute("class", "supprimerPhoto");
+
+        const image = document.createElement("img");
+        image.setAttribute("src", "assets/icons/poubelle.png");
+
+        supprimerPhoto.appendChild(image);
+        conteneurImages.appendChild(supprimerPhoto);
 
         const figCaption = document.createElement("figcaption");
         figCaption.setAttribute("class", "classeFigCaption");
@@ -198,7 +210,7 @@ function galerieImagesModale(emplacementGallery) {
         const titre = document.createElement("p");
         titre.setAttribute("class", "classTitre");
         titre.innerText = element["title"];
-        figure.appendChild(titre);
+        figCaption.appendChild(titre);
     }
 }
 
@@ -240,3 +252,71 @@ function ouvertureEtFermetureModaleAjouterImages() {
   }
   
   ouvertureEtFermetureModaleAjouterImages();
+
+// -------------------------------------------------------------------------
+
+async function recuperationCategories() {
+    const reponse = await fetch("http://localhost:5678/api/categories");
+    return await reponse.json();
+}
+
+recuperationCategories()
+.then(categories => {
+    const menuDeroulant = document.getElementById('menuDeroulantCategories')
+
+    const optionVide = document.createElement('option');
+    optionVide.value = ""
+    optionVide.textContent = ""
+    menuDeroulant.appendChild(optionVide)
+    categories.forEach(categorie => {
+        const options = document.createElement('option')
+        options.value = categorie.value
+        options.textContent = categorie.name
+        menuDeroulant.appendChild(options)
+    })
+})
+
+// -------------------------------------------------------------------------
+
+function previsualisationDesPhotos() {
+    const fileInput = document.getElementById('file');
+const previewImage = document.getElementById('previewImage');
+const defaultImage = document.getElementById('defaultImage');
+
+fileInput.addEventListener('change', function(event) {
+  const file = event.target.files[0];
+
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      previewImage.src = reader.result;
+      previewImage.style.display = 'block';
+      defaultImage.style.display = 'none';
+      fileInput.style.display = 'none';
+      document.querySelector('.personnalisationInputImage').style.display = 'none';
+      document.querySelector('.precisionPoids').style.display = 'none';
+    };
+
+    reader.readAsDataURL(file);
+  } else {
+    previewImage.src = "";
+    previewImage.style.display = 'none';
+    defaultImage.style.display = 'block';
+    fileInput.style.display = 'inline-block';
+  }
+});
+
+const croixDeFermetureAjouterImages = modaleAjouterImages.querySelector(".croixFermetureModales");
+
+croixDeFermetureAjouterImages.addEventListener('click', function() {
+    previewImage.src = ""
+    previewImage.style.display = "none"
+    defaultImage.style.display = "block"
+    fileInput.value = ""
+    document.querySelector('.personnalisationInputImage').style.display = 'inline-block';
+    document.querySelector('.precisionPoids').style.display = 'block';
+})
+}
+
+previsualisationDesPhotos()
