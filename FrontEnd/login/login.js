@@ -35,9 +35,8 @@ function verificationDesIdentifiants() {
             const contenu = await reponse.json()
             console.log(contenu)
             console.log(contenu.token)
-            alert("Vous êtes connecté !")
 
-            let ChangementEtatToken = JSON.stringify(contenu)
+            let ChangementEtatToken = JSON.stringify(contenu.token)
             sessionStorage.setItem("token", ChangementEtatToken);
 
             let stockageToken = sessionStorage.getItem("token")
@@ -50,8 +49,8 @@ function verificationDesIdentifiants() {
 
            } else if (reponse.status == 404) {
 
-            const alerteEmail = document.querySelector(".alerteEmail");
-            alerteEmail.textContent = "E-mail incorrect !";
+            const alerteEmail = document.querySelector(".alerteErreur");
+            alerteEmail.textContent = "Identifiant ou mot de passe incorrect !";
     
             function cacheAlerteEmail() {
                 alerteEmail.textContent = "";
@@ -59,14 +58,6 @@ function verificationDesIdentifiants() {
             setTimeout(cacheAlerteEmail, 2000)
 
 
-           } else if (reponse.status == 401) {
-            const alerteMotDePasse = document.querySelector(".alerteMotDePasse");
-            alerteMotDePasse.textContent = "Mot de passe incorrect !";
-    
-            function cacheAlerteMotDePasse() {
-                alerteMotDePasse.textContent = "";
-            }
-            setTimeout(cacheAlerteMotDePasse, 2000)
            }
 
         } catch (error) {

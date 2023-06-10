@@ -142,8 +142,7 @@ main {
     width: 100%;
 }
 
-.alerteEmail,
-.alerteMotDePasse {
+.alerteErreur {
 	color: lightcoral;
 	font-size: 12.5px;
 	margin-top: 5px;

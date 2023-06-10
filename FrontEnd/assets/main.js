@@ -45,6 +45,9 @@ async function updateGallery(emplacementGallery) {
 updateGallery(".gallery");
 
 // -------------------------------------------------------------------------
+// Récupère les différentes catégories fournies par l'api, puis ensuite les 
+// utiliser pour filtrer les différentes images.
+// -------------------------------------------------------------------------
 
 async function recuperationCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
@@ -97,6 +100,9 @@ async function categoriesAffichage(emplacementGallery) {
 categoriesAffichage(".gallery")
 
 // -------------------------------------------------------------------------
+// Verifie si le token est bien présent dans la session et applique le fait de
+// pouvoir voir des éléments uniquement s'il s'agit de l'utilisatrice.
+// -------------------------------------------------------------------------
 
 function vérifierToken() {
 
@@ -135,7 +141,11 @@ function vérifierToken() {
 }
 
 vérifierToken()
+
 // -------------------------------------------------------------------------
+// Sert simplement à cacher les boutons catégories si l'utilisatrice est connectée.
+// -------------------------------------------------------------------------
+
 
 function supprimerCategories() {
 
@@ -150,13 +160,16 @@ function supprimerCategories() {
 supprimerCategories()
 
 // -------------------------------------------------------------------------
+// Permet d'ouvrir la première modale "Mes projets".
+// -------------------------------------------------------------------------
 
 function ouvertureEtFermetureModaleMesProjets() {
     const boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
     const arrierePlanGris = document.querySelector(".arrierePlanGris")
     const modaleMesProjets = document.getElementById("modaleMesProjets")
 
-    boutonModifierMesProjets.addEventListener('click', function() {
+    boutonModifierMesProjets.addEventListener('click', function(event) {
+      event.preventDefault();
         if (!arrierePlanGris.classList.contains("ouvertureModales") || !modaleMesProjets.classList.contains("modaleMesProjetsOuverte")) {
             arrierePlanGris.classList.toggle('ouvertureModales')
             modaleMesProjets.classList.toggle('ouvertureModales')
@@ -165,7 +178,8 @@ function ouvertureEtFermetureModaleMesProjets() {
     )
     const croixDeFermetureMesProjets = document.querySelector(".croixFermetureModales")
     
-    croixDeFermetureMesProjets.addEventListener('click', function(){
+    croixDeFermetureMesProjets.addEventListener('click', function(event){
+      event.preventDefault();
         arrierePlanGris.classList.toggle('ouvertureModales')
         modaleMesProjets.classList.toggle('ouvertureModales')
     })
@@ -173,6 +187,9 @@ function ouvertureEtFermetureModaleMesProjets() {
 
 ouvertureEtFermetureModaleMesProjets()
 
+// -------------------------------------------------------------------------
+// Réutilisation des images affichées sur le site, mais ici elles sont injectées
+// dans la madole pour permettre suppression.
 // -------------------------------------------------------------------------
 
 function galerieImagesModale(emplacementGallery) {
@@ -211,6 +228,35 @@ function galerieImagesModale(emplacementGallery) {
         titre.setAttribute("class", "classTitre");
         titre.innerText = element["title"];
         figCaption.appendChild(titre);
+
+        let token = JSON.parse (sessionStorage.getItem("token"));
+        console.log(token)
+
+        supprimerPhoto.addEventListener("click", async () => {
+          const imageId = element["id"];
+          console.log(imageId)
+          console.log("Test")
+          
+          try {
+            const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              }
+            });
+        
+            if (response.ok) {
+              console.log('L\'image a été supprimée avec succès.');
+              figure.remove();
+              await updateGalleryModale(emplacementGallery);
+            } else {
+              console.log('Une erreur s\'est produite lors de la suppression de l\'image.');
+            }
+          } catch (error) {
+            console.log('Une erreur s\'est produite lors de la requête DELETE:', error);
+          }
+        });
     }
 }
 
@@ -231,21 +277,24 @@ function ouvertureEtFermetureModaleAjouterImages() {
     const modaleMesProjets = document.getElementById("modaleMesProjets")
     const croixDeFermetureAjouterImages = modaleAjouterImages.querySelector(".croixFermetureModales");
   
-    boutonAjouter.addEventListener('click', function() {
+    boutonAjouter.addEventListener('click', function(event) {
+      event.preventDefault();
       if (!modaleAjouterImages.classList.contains("ouvertureModales")) {
         modaleAjouterImages.classList.toggle("ouvertureModales");
         modaleMesProjets.classList.toggle("ouvertureModales")
       }
     });
   
-    croixDeFermetureAjouterImages.addEventListener('click', function() {
+    croixDeFermetureAjouterImages.addEventListener('click', function(event) {
+      event.preventDefault();
       modaleAjouterImages.classList.toggle('ouvertureModales');
       arrierePlanGris.classList.toggle("ouvertureModales")
     });
 
     const flecheRetour = document.querySelector(".flecheRetour")
 
-    flecheRetour.addEventListener('click', function() {
+    flecheRetour.addEventListener('click', function(event) {
+        event.preventDefault();
         modaleAjouterImages.classList.toggle("ouvertureModales")
         modaleMesProjets.classList.toggle("ouvertureModales")
     })
@@ -253,6 +302,9 @@ function ouvertureEtFermetureModaleAjouterImages() {
   
   ouvertureEtFermetureModaleAjouterImages();
 
+// -------------------------------------------------------------------------
+// Récupère les catégories fournies par l'api pour qu'elles soient prisent en
+// compte dans un menu déroulant de la modale "Ajout d'une photo".
 // -------------------------------------------------------------------------
 
 async function recuperationCategories() {
@@ -270,16 +322,18 @@ recuperationCategories()
     menuDeroulant.appendChild(optionVide)
     categories.forEach(categorie => {
         const options = document.createElement('option')
-        options.value = categorie.value
+        options.value = categorie.id
         options.textContent = categorie.name
         menuDeroulant.appendChild(options)
     })
 })
 
 // -------------------------------------------------------------------------
+// Permet de prévisualiser l'image que nous souhaitons ajouter dans la galerie
+// -------------------------------------------------------------------------
 
 function previsualisationDesPhotos() {
-    const fileInput = document.getElementById('file');
+const fileInput = document.getElementById('file');
 const previewImage = document.getElementById('previewImage');
 const defaultImage = document.getElementById('defaultImage');
 
@@ -307,6 +361,7 @@ fileInput.addEventListener('change', function(event) {
   }
 });
 
+const modaleAjouterImages = document.getElementById("modaleAjouterImages")
 const croixDeFermetureAjouterImages = modaleAjouterImages.querySelector(".croixFermetureModales");
 
 croixDeFermetureAjouterImages.addEventListener('click', function() {
@@ -320,3 +375,68 @@ croixDeFermetureAjouterImages.addEventListener('click', function() {
 }
 
 previsualisationDesPhotos()
+
+// -------------------------------------------------------------------------
+
+async function envoyerImage() {
+  let token = JSON.parse (sessionStorage.getItem("token"));
+  const formData = new FormData()
+  formData.append("image", document.getElementById("file").files[0])
+  formData.append("title", document.getElementById("ajouteTonTitre").value)
+  formData.append("category", document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].value)
+  const reponse = await fetch("http://localhost:5678/api/works", {
+      method: 'POST',
+      headers: {
+          'Authorization': `Bearer ${token}`,
+      },
+      body: formData
+  });
+  return reponse;
+};
+
+function validiteForme() {
+  return document.getElementById("file").files[0] !== undefined &&
+         document.getElementById("ajouteTonTitre").value !== "" &&
+         document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].text !== ""
+}
+
+function activationDuBoutonValider() {
+  const boutonValider = document.querySelector(".boutonValider")
+  if (validiteForme()) {
+        boutonValider.style.backgroundColor = "#1D6154"
+        boutonValider.disabled = false
+  } else {
+    boutonValider.style.backgroundColor = "#A7A7A7"
+    boutonValider.disabled = true
+  }
+}
+
+/*
+1 - empêcher le comportement du submit
+2 - verifier si le formulaire est valide
+3 - envoyer les donners au serveur
+*/
+
+modaleAjouterImages.addEventListener('submit', function(event) {
+  console.log("test")
+  event.preventDefault()
+  if(validiteForme()) {
+    envoyerImage()
+  }
+})
+
+const imageVoulantEtreAjoutee = document.getElementById("file")
+const titreDeImage = document.getElementById("ajouteTonTitre")
+const categorieDeImage = document.getElementById("menuDeroulantCategories")
+
+imageVoulantEtreAjoutee.addEventListener('change', function() {
+  activationDuBoutonValider()
+})
+
+titreDeImage.addEventListener('change', function() {
+  activationDuBoutonValider()
+})
+
+categorieDeImage.addEventListener('change', function() {
+  activationDuBoutonValider()
+})

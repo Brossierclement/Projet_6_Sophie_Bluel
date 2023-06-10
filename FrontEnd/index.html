@@ -17,8 +17,8 @@
   <body>
     <div class="arrierePlanGris"></div>
     <!-- Modale mes projets -->
-    <div id="modaleMesProjets" class="apparenceModales">
-      <button class="croixFermetureModales">
+    <form id="modaleMesProjets" class="apparenceModales">
+      <button type="submit" class="croixFermetureModales">
         <img src="assets/icons/fermer.png" alt="" />
       </button>
       <section class="mesProjetsHeader">
@@ -26,13 +26,13 @@
       </section>
       <div class="mesProjetsBody barreScroll"></div>
       <div class="mesProjetsFooter">
-        <button class="boutonAjouter">Ajouter une photo</button>
-        <button class="boutonSupprimer">Supprimer la galerie</button>
+        <button type="submit" class="boutonAjouter">Ajouter une photo</button>
+        <button type="submit" class="boutonSupprimer">Supprimer la galerie</button>
       </div>
-    </div>
+    </form>
 
     <!-- Modale ajouter images -->
-    <div id="modaleAjouterImages" class="apparenceModales">
+    <form id="modaleAjouterImages" class="apparenceModales">
       <button class="flecheRetour">
         <img src="assets/icons/fleche-gauche.png" alt="" />
       </button>
@@ -60,9 +60,9 @@
         </div>
       </div>
       <div class="AjouterImagesFooter">
-        <button class="boutonValider">Valider</button>
+        <button disabled class="boutonValider">Valider</button>
       </div>
-    </div>
+    </form>
 
     <div class="modeEdition">
       <img src="assets/icons/editer.png" alt="icône d'édition" />
