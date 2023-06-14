@@ -1,3 +1,11 @@
+const form = document.getElementById("modaleMesProjets")
+console.log(form)
+form.addEventListener('submit', function(event) {
+  debugger
+  console.log(event)
+  event.preventDefault();
+})
+
 // Récupération des données API :
 
 let images = [];
@@ -232,12 +240,14 @@ function galerieImagesModale(emplacementGallery) {
         let token = JSON.parse (sessionStorage.getItem("token"));
         console.log(token)
 
-        supprimerPhoto.addEventListener("click", async () => {
+        supprimerPhoto.addEventListener("click", async (event) => {
+          event.preventDefault();
           const imageId = element["id"];
           console.log(imageId)
           console.log("Test")
           
           try {
+            // l'api pose problem, je dois faire un truc je reviens
             const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
               method: 'DELETE',
               headers: {
@@ -249,6 +259,7 @@ function galerieImagesModale(emplacementGallery) {
             if (response.ok) {
               console.log('L\'image a été supprimée avec succès.');
               figure.remove();
+              await updateGallery(".gallery");
               await updateGalleryModale(emplacementGallery);
             } else {
               console.log('Une erreur s\'est produite lors de la suppression de l\'image.');
@@ -411,17 +422,35 @@ function activationDuBoutonValider() {
   }
 }
 
-/*
-1 - empêcher le comportement du submit
-2 - verifier si le formulaire est valide
-3 - envoyer les donners au serveur
-*/
+function resetInputs() {
+  const imageVoulantEtreAjoutee = document.getElementById("file");
+  const titreDeImage = document.getElementById("ajouteTonTitre");
+  const categorieDeImage = document.getElementById("menuDeroulantCategories");
+  const previewImage = document.getElementById('previewImage');
+  const defaultImage = document.getElementById('defaultImage');
+  const personnalisationInputImage = document.querySelector('.personnalisationInputImage');
+  const precisionPoids = document.querySelector('.precisionPoids');
 
-modaleAjouterImages.addEventListener('submit', function(event) {
+  imageVoulantEtreAjoutee.value = ""; // Réinitialise la valeur du champ de fichier
+  titreDeImage.value = ""; // Réinitialise la valeur du champ de titre
+  categorieDeImage.selectedIndex = 0; // Réinitialise la sélection du champ de catégorie
+  previewImage.src = "";
+  previewImage.style.display = 'none';
+  defaultImage.style.display = 'block';
+  personnalisationInputImage.style.display = 'inline-block'; // Réaffiche le bouton d'insertion d'image
+  precisionPoids.style.display = 'block';
+}
+
+const modaleAjouterImages = document.getElementById("modaleAjouterImages");
+
+modaleAjouterImages.addEventListener('submit', async function(event) {
   console.log("test")
   event.preventDefault()
   if(validiteForme()) {
-    envoyerImage()
+    await envoyerImage()
+    await updateGallery(".gallery");
+    await updateGalleryModale(".mesProjetsBody");
+    resetInputs();
   }
 })
 

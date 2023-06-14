@@ -48,8 +48,6 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -393,7 +391,6 @@ main {
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-	max-height: 80%;
 	display: none;
 	padding: 20px;
 	position: fixed;
@@ -456,6 +453,10 @@ main {
 	transform: scale(1.8);
 }
 
+.apparenceModalesMesProjets {
+	height: 56%;
+}
+
 .mesProjetsHeader {
 	align-items: center;
 	display: flex;
@@ -476,7 +477,7 @@ main {
 	margin-bottom: 25px;
 	overflow-y: scroll;
 	padding-bottom: 25px;
-	width: 75%;
+	width: 90%;
 }
 
 .mesProjetsBody img {
@@ -552,7 +553,6 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 25px;
-	height: 70%;
 	padding-bottom: 50px;
 	width: 90%;
 }
@@ -577,7 +577,7 @@ main {
 }
 
 #previewImage {
-	width: 40%;
+	width: 30%;
 }
 
 .personnalisationInputImage {
@@ -683,4 +683,11 @@ main {
 
 .classBoutonCategories:hover {
 	scale: 1.05;
+}
+
+@media (min-width: 1440px) {
+	body {
+		max-width: 1440px;
+		margin: auto;
+	}
 }

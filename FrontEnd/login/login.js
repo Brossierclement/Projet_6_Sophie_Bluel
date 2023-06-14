@@ -45,7 +45,7 @@ function verificationDesIdentifiants() {
             console.log(stockageToken)
             console.log(recuperationToken)
 
-            window.location.href = "http://127.0.0.1:5500/Portfolio-architecte-sophie-bluel/FrontEnd/index.html";
+            window.location.href = "/index.html";
 
            } else if (reponse.status == 404) {
 
