@@ -228,6 +228,17 @@ function galerieImagesModale(emplacementGallery) {
         supprimerPhoto.appendChild(image);
         conteneurImages.appendChild(supprimerPhoto);
 
+        if (imagesIndex === 0) {
+          const deplacerPhoto = document.createElement("button");
+          deplacerPhoto.setAttribute("class", "deplacerPhoto");
+  
+          const imageDeplacerPhoto = document.createElement("img");
+          imageDeplacerPhoto.setAttribute("src", "assets/icons/option-de-deplacement.png");
+  
+          deplacerPhoto.appendChild(imageDeplacerPhoto);
+          conteneurImages.appendChild(deplacerPhoto);
+        }
+
         const figCaption = document.createElement("figcaption");
         figCaption.setAttribute("class", "classeFigCaption");
         figure.appendChild(figCaption);

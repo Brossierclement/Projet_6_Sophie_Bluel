@@ -54,7 +54,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 50px;
 }
 section {
 	margin: 50px 0
@@ -210,8 +210,7 @@ a:hover {
 }
 
 main {
-	margin-left: 85px;
-    margin-right: 85px;
+	margin: 0px 150px;
 }
 
 /* ////////// PARAMETRES PRECIS */
@@ -224,6 +223,8 @@ main {
 	gap: 10px;
 	justify-content: center;
 	padding: 10px 0px 10px 0px;
+	width: 100vw;
+	margin-left: calc(-1*((100vw - 100%)/2));
 }
 
 .modeEdition img {
@@ -454,7 +455,7 @@ main {
 }
 
 .apparenceModalesMesProjets {
-	height: 56%;
+	height: 65%;
 }
 
 .mesProjetsHeader {
@@ -504,7 +505,26 @@ main {
 }
 
 .supprimerPhoto img {
-	width: 20px;
+	width: 15px;
+	filter: invert(100%);
+}
+
+.deplacerPhoto {
+	align-items: center;
+	background-color: black;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	padding: 5px;
+	position: absolute;
+	right: 35px;
+	text-decoration: none;
+	top: 5px;
+	z-index: 1;
+}
+
+.deplacerPhoto img {
+	width: 15px;
 	filter: invert(100%);
 }
 
@@ -666,7 +686,11 @@ main {
 }
 
 .classBoutonTous:hover {
-	scale: 1.05;
+	scale: 1.02;
+}
+
+.classBoutonTous:active {
+	scale: 0.5;
 }
 
 .classBoutonCategories {
@@ -678,16 +702,20 @@ main {
 	padding: 5px 20px 5px 20px;
 	font-weight: 700;
 	font-size: 16px;
-	transition: scale 0.5s ease-in-out;
+	transition: scale 0.3s ease-in-out;
 }
 
 .classBoutonCategories:hover {
-	scale: 1.05;
+	scale: 1.02;
+}
+
+.classBoutonCategories:active {
+	scale: 0.5;
 }
 
 @media (min-width: 1440px) {
-	body {
-		max-width: 1440px;
-		margin: auto;
+	body:not(.modeEdition) {
+	  max-width: 1440px;
+	  margin: auto;
 	}
-}
+  }
