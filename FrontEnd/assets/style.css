@@ -143,6 +143,7 @@ margin: auto;
 }
 #contact > * {
 	text-align: center;
+	margin-top: 30px;
 
 }
 #contact h2{
@@ -246,11 +247,11 @@ main {
 }
 
 .modeEdition button:hover {
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .modeEdition button:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 /* ----- Liens de navigation ----- */
@@ -284,11 +285,11 @@ main {
 }
 
 .modificationImageProfile:hover {
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .modificationImageProfile:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 .modificationImageProfile img {
@@ -314,11 +315,11 @@ main {
 }
 
 .modificationTexteIntroduction:hover {
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .modificationTexteIntroduction:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 .modificationTexteIntroduction img {
@@ -358,7 +359,7 @@ main {
 } */
 
 .modificationImageProjets:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 .modificationImageProjets img {
@@ -472,7 +473,7 @@ main {
 .mesProjetsBody {
 	border-bottom: 1px solid #B1663C;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	margin-bottom: 25px;
@@ -546,7 +547,7 @@ main {
 }
 
 .boutonAjouter:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 .boutonSupprimer {
@@ -559,7 +560,7 @@ main {
 }
 
 .boutonSupprimer:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 /* ----- Modale Ajouter Images ----- */
@@ -612,7 +613,7 @@ main {
 }
 
 .personnalisationInputImage:hover {
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .saisirImage {
@@ -651,6 +652,11 @@ main {
 	width: 100%;
 }
 
+.messageErreur {
+	color: lightcoral;
+	margin-top: 10px;
+}
+
 .AjouterImagesFooter {
 	margin-top: 30px;
 }
@@ -686,11 +692,11 @@ main {
 }
 
 .classBoutonTous:hover {
-	scale: 1.02;
+	transform: scale(1.02);
 }
 
 .classBoutonTous:active {
-	scale: 0.5;
+	transform: scale(0.5);
 }
 
 .classBoutonCategories {
@@ -706,11 +712,11 @@ main {
 }
 
 .classBoutonCategories:hover {
-	scale: 1.02;
+	transform: scale(1.02);
 }
 
 .classBoutonCategories:active {
-	scale: 0.5;
+	transform: scale(0.5);
 }
 
 @media (min-width: 1440px) {

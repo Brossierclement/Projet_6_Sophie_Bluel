@@ -125,12 +125,12 @@ main {
     color: white;
 	cursor: pointer;
     height: 35px;
-	scale: 1;
+	transform: scale(1);
 	transition: scale 0.1s ease-in-out;
 }
 
 .connexion:active {
-	scale: 0.9;
+	transform: scale(0.9);
 }
 
 .paragraph {

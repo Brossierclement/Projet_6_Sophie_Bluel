@@ -47,13 +47,13 @@ function verificationDesIdentifiants() {
 
             window.location.href = "/index.html";
 
-           } else if (reponse.status == 404) {
+           } else if (reponse.status == 401 || reponse.status == 404) {
 
-            const alerteEmail = document.querySelector(".alerteErreur");
-            alerteEmail.textContent = "Identifiant ou mot de passe incorrect !";
+            const alerteErreur = document.querySelector(".alerteErreur");
+            alerteErreur.textContent = "Identifiant ou mot de passe incorrect !";
     
             function cacheAlerteEmail() {
-                alerteEmail.textContent = "";
+                alerteErreur.textContent = "";
             }
             setTimeout(cacheAlerteEmail, 2000)
 

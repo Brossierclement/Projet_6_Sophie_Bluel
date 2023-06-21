@@ -45,7 +45,7 @@
       <div class="AjouterImagesBody">
         <div class="ajouteTonImage">
           <img src="assets/icons/image.png" alt="" id="defaultImage" />
-          <img src="" alt="" id="previewImage" style="display: none" />
+          <img src="#" alt="" id="previewImage" style="display: none" />
           <label for="file" class="personnalisationInputImage">+ Ajouter photo</label>
           <input type="file" id="file" class="saisirImage" />
           <p class="precisionPoids">jpg. png : 4mo max</p>
@@ -59,6 +59,7 @@
           <select id="menuDeroulantCategories"></select>
         </div>
       </div>
+      <p class="messageErreur"></p>
       <div class="AjouterImagesFooter">
         <button disabled class="boutonValider">Valider</button>
       </div>
@@ -79,7 +80,7 @@
       </nav>
     </header>
     <main>
-      <section id="introduction">
+      <div id="introduction">
         <figure>
           <img src="./assets/images/sophie-bluel.png" alt="" />
           <button class="modificationImageProfile">
@@ -108,8 +109,8 @@
             décorateur(trice)
           </p>
         </article>
-      </section>
-      <section id="portfolio">
+      </div>
+      <div id="portfolio">
         <div class="conteneurTitreEtModificationProjets">
           <section class="titreEtModificationProjets">
             <h2>Mes Projets</h2>
@@ -121,7 +122,7 @@
         </div>
         <div class="category"></div>
         <div class="gallery"></div>
-      </section>
+      </div>
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>

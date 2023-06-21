@@ -292,6 +292,47 @@ updateGalleryModale(".mesProjetsBody");
 
 // -------------------------------------------------------------------------
 
+function validiteForme() {
+  return document.getElementById("file").files[0] !== undefined &&
+         document.getElementById("ajouteTonTitre").value !== "" &&
+         document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].text !== ""
+}
+
+function activationDuBoutonValider() {
+  const boutonValider = document.querySelector(".boutonValider")
+  const messageErreur = document.querySelector(".messageErreur")
+  if (validiteForme()) {
+    messageErreur.textContent = ""
+        boutonValider.style.backgroundColor = "#1D6154"
+        boutonValider.disabled = false
+  } else {
+    messageErreur.textContent = "Veuillez remplir tous les champs !"
+    console.log(messageErreur)
+    boutonValider.style.backgroundColor = "#A7A7A7"
+    boutonValider.disabled = true
+  }
+}
+
+function resetInputs() {
+  const imageVoulantEtreAjoutee = document.getElementById("file");
+  const titreDeImage = document.getElementById("ajouteTonTitre");
+  const categorieDeImage = document.getElementById("menuDeroulantCategories");
+  const previewImage = document.getElementById('previewImage');
+  const defaultImage = document.getElementById('defaultImage');
+  const personnalisationInputImage = document.querySelector('.personnalisationInputImage');
+  const precisionPoids = document.querySelector('.precisionPoids');
+
+  imageVoulantEtreAjoutee.value = "";
+  titreDeImage.value = "";
+  categorieDeImage.selectedIndex = 0;
+  previewImage.src = "";
+  previewImage.style.display = 'none';
+  defaultImage.style.display = 'block';
+  personnalisationInputImage.style.display = 'inline-block';
+  precisionPoids.style.display = 'block';
+  activationDuBoutonValider()
+}
+
 function ouvertureEtFermetureModaleAjouterImages() {
     const boutonAjouter = document.querySelector(".boutonAjouter");
     const arrierePlanGris = document.querySelector(".arrierePlanGris")
@@ -311,6 +352,7 @@ function ouvertureEtFermetureModaleAjouterImages() {
       event.preventDefault();
       modaleAjouterImages.classList.toggle('ouvertureModales');
       arrierePlanGris.classList.toggle("ouvertureModales")
+      resetInputs()
     });
 
     const flecheRetour = document.querySelector(".flecheRetour")
@@ -319,6 +361,7 @@ function ouvertureEtFermetureModaleAjouterImages() {
         event.preventDefault();
         modaleAjouterImages.classList.toggle("ouvertureModales")
         modaleMesProjets.classList.toggle("ouvertureModales")
+        resetInputs()
     })
   }
   
@@ -415,42 +458,6 @@ async function envoyerImage() {
   });
   return reponse;
 };
-
-function validiteForme() {
-  return document.getElementById("file").files[0] !== undefined &&
-         document.getElementById("ajouteTonTitre").value !== "" &&
-         document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].text !== ""
-}
-
-function activationDuBoutonValider() {
-  const boutonValider = document.querySelector(".boutonValider")
-  if (validiteForme()) {
-        boutonValider.style.backgroundColor = "#1D6154"
-        boutonValider.disabled = false
-  } else {
-    boutonValider.style.backgroundColor = "#A7A7A7"
-    boutonValider.disabled = true
-  }
-}
-
-function resetInputs() {
-  const imageVoulantEtreAjoutee = document.getElementById("file");
-  const titreDeImage = document.getElementById("ajouteTonTitre");
-  const categorieDeImage = document.getElementById("menuDeroulantCategories");
-  const previewImage = document.getElementById('previewImage');
-  const defaultImage = document.getElementById('defaultImage');
-  const personnalisationInputImage = document.querySelector('.personnalisationInputImage');
-  const precisionPoids = document.querySelector('.precisionPoids');
-
-  imageVoulantEtreAjoutee.value = ""; // Réinitialise la valeur du champ de fichier
-  titreDeImage.value = ""; // Réinitialise la valeur du champ de titre
-  categorieDeImage.selectedIndex = 0; // Réinitialise la sélection du champ de catégorie
-  previewImage.src = "";
-  previewImage.style.display = 'none';
-  defaultImage.style.display = 'block';
-  personnalisationInputImage.style.display = 'inline-block'; // Réaffiche le bouton d'insertion d'image
-  precisionPoids.style.display = 'block';
-}
 
 const modaleAjouterImages = document.getElementById("modaleAjouterImages");
 
