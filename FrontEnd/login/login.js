@@ -13,6 +13,7 @@ async function recuperationApiIdentification() {
     return reponse;
 };
 
+
 function verificationDesIdentifiants() {
 
     const formulaire = document.querySelector(".formulaire")
@@ -27,6 +28,10 @@ function verificationDesIdentifiants() {
         event.preventDefault();
 
         try {
+            /*
+            Appelle la fonction recuperationApiIdentification pour faire la requête HTTP
+            d'identification.
+            */
            const reponse = await recuperationApiIdentification()
            console.log(reponse.status)
 

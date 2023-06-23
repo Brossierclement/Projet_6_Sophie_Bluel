@@ -1,15 +1,17 @@
+/*
+Récupère le formulaire "modaleMesProjets", puis empêche le rechargement.
+*/
 const form = document.getElementById("modaleMesProjets")
-console.log(form)
 form.addEventListener('submit', function(event) {
   debugger
-  console.log(event)
   event.preventDefault();
 })
 
-// Récupération des données API :
-
+/*
+Récupère les images à partir de l'API avec la fonction fetch, puis met à jour
+la galerie dans l'index HTML enfin affiche les images et leurs titres.
+*/
 let images = [];
-// Permet de garder en stock "let images", les modifications sont uniquement sur "ImagesCourantes".
 let imagesCourantes = [];
 
 async function recuperationImages() {
@@ -21,7 +23,6 @@ function galerieImages(emplacementGallery) {
     const galerie = document.querySelector(emplacementGallery);
     galerie.replaceChildren();
     for (imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
-        // Récupére l'objet à l'index "imagesIndex" dans la liste image.
         const element=imagesCourantes[imagesIndex];
 
         const figure = document.createElement("figure");
@@ -52,11 +53,11 @@ async function updateGallery(emplacementGallery) {
 
 updateGallery(".gallery");
 
-// -------------------------------------------------------------------------
-// Récupère les différentes catégories fournies par l'api, puis ensuite les 
-// utiliser pour filtrer les différentes images.
-// -------------------------------------------------------------------------
-
+/*
+Récupère les catégories à partir de l'API avec la fonction fetch, crée des boutons
+dans l'index HTML, puis ajoute un addEventListener pour permettre de filtrer
+les images en fonction de la catégorie sélectionnée enfin met à jour la galerie.
+*/
 async function recuperationCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     return await reponse.json();
@@ -67,14 +68,22 @@ function filtrage(categorie, emplacementGallery) {
     let categorieIndex = 0;
     for (categorieIndex = 0; categorieIndex < images.length; categorieIndex++) {
         const element = images[categorieIndex];
+        /*
+        Si la catégorie et le nom de element === categorie alors ajoute l'image dans
+        le tableau imagesTemporaires.
+        */
         if (element["category"]["name"] === categorie) {
             imagesTemporaires.push(element);
         }
     }
     imagesCourantes = imagesTemporaires;
-    console.log(imagesTemporaires);
     galerieImages(emplacementGallery)
 }
+
+/*
+Permet la création dynamique des boutons pour les catégories, le bouton Tous est crée
+indépendamment.
+*/
 
 async function categoriesAffichage(emplacementGallery) {
     const conteneurCategories = document.querySelector(".category");
@@ -107,10 +116,10 @@ async function categoriesAffichage(emplacementGallery) {
 
 categoriesAffichage(".gallery")
 
-// -------------------------------------------------------------------------
-// Verifie si le token est bien présent dans la session et applique le fait de
-// pouvoir voir des éléments uniquement s'il s'agit de l'utilisatrice.
-// -------------------------------------------------------------------------
+/*
+Vérifie si mon token est bien présent dans le sessionStorage, si présent des actions
+s'effectuent comme remplacer le login en déconnexion.
+*/
 
 function vérifierToken() {
 
@@ -142,17 +151,17 @@ function vérifierToken() {
         modificationTexteIntroduction.style.display = "flex"
         modificationImageProjets.style.display = "flex"
 
-      console.log("Le token est valide !");
+      console.log("Le token est présent !");
     } else {
-      console.log("Le token est invalide ou n'existe pas !");
+      console.log("Le token n'est pas présent !");
     }
 }
 
 vérifierToken()
 
-// -------------------------------------------------------------------------
-// Sert simplement à cacher les boutons catégories si l'utilisatrice est connectée.
-// -------------------------------------------------------------------------
+/*
+Supprime simplement les boutons de catégories si l'utilisateur est connecté.
+*/
 
 
 function supprimerCategories() {
@@ -167,9 +176,11 @@ function supprimerCategories() {
 
 supprimerCategories()
 
-// -------------------------------------------------------------------------
-// Permet d'ouvrir la première modale "Mes projets".
-// -------------------------------------------------------------------------
+/*
+Permet d'ouvrire la modale des projets via un événement clic qui applique une class
+provoquant l'ouverture de la modale, mais également la fermeture cependant via un autre
+évenement clic via la croix. 
+*/
 
 function ouvertureEtFermetureModaleMesProjets() {
     const boutonModifierMesProjets = document.querySelector(".modificationImageProjets")
@@ -202,6 +213,9 @@ ouvertureEtFermetureModaleMesProjets()
 
 function galerieImagesModale(emplacementGallery) {
     const galerie = document.querySelector(emplacementGallery);
+    /*
+    Permet de vider la galerie en supprimant les enfants.
+    */
     galerie.replaceChildren();
     for (let imagesIndex = 0; imagesIndex < imagesCourantes.length; imagesIndex++) {
         const element = imagesCourantes[imagesIndex];
@@ -254,11 +268,8 @@ function galerieImagesModale(emplacementGallery) {
         supprimerPhoto.addEventListener("click", async (event) => {
           event.preventDefault();
           const imageId = element["id"];
-          console.log(imageId)
-          console.log("Test")
           
           try {
-            // l'api pose problem, je dois faire un truc je reviens
             const response = await fetch(`http://localhost:5678/api/works/${imageId}`, {
               method: 'DELETE',
               headers: {
@@ -267,6 +278,9 @@ function galerieImagesModale(emplacementGallery) {
               }
             });
         
+            /*
+            Sert à vérifier si la requête HTTP a été réussie c'est à dire (200).
+            */
             if (response.ok) {
               console.log('L\'image a été supprimée avec succès.');
               figure.remove();
@@ -293,6 +307,12 @@ updateGalleryModale(".mesProjetsBody");
 // -------------------------------------------------------------------------
 
 function validiteForme() {
+  /*
+  Return est une instruction qui permet de renvoyer une valeur.
+  Si conditions remplies : true.
+  Si conditions non remplies : false.
+  Permet également d'utiliser le résultat de la fonction dans une autre partie du code.
+  */
   return document.getElementById("file").files[0] !== undefined &&
          document.getElementById("ajouteTonTitre").value !== "" &&
          document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].text !== ""
@@ -367,10 +387,9 @@ function ouvertureEtFermetureModaleAjouterImages() {
   
   ouvertureEtFermetureModaleAjouterImages();
 
-// -------------------------------------------------------------------------
-// Récupère les catégories fournies par l'api pour qu'elles soient prisent en
-// compte dans un menu déroulant de la modale "Ajout d'une photo".
-// -------------------------------------------------------------------------
+/*
+Récupère les catégories, puis met à jour de manière dynamique dans un menu déroulant.
+*/
 
 async function recuperationCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
@@ -378,6 +397,9 @@ async function recuperationCategories() {
 }
 
 recuperationCategories()
+/*
+Traite la valeur RESOLUE d'une promesse, comme celle de la ligne 396.
+*/
 .then(categories => {
     const menuDeroulant = document.getElementById('menuDeroulantCategories')
 
@@ -385,6 +407,10 @@ recuperationCategories()
     optionVide.value = ""
     optionVide.textContent = ""
     menuDeroulant.appendChild(optionVide)
+    /*
+    ForEach parcours chaque élément du tableau catégories et éxécute des opérations
+    spécifiques pour chaque catégorie créant des options dans le menu déroulant.
+    */
     categories.forEach(categorie => {
         const options = document.createElement('option')
         options.value = categorie.id
@@ -393,19 +419,29 @@ recuperationCategories()
     })
 })
 
-// -------------------------------------------------------------------------
-// Permet de prévisualiser l'image que nous souhaitons ajouter dans la galerie
-// -------------------------------------------------------------------------
+/*
+Permet d'avoir un aperçu de l'image que l'utilisateur souhaite utiliser.
+*/
 
 function previsualisationDesPhotos() {
 const fileInput = document.getElementById('file');
 const previewImage = document.getElementById('previewImage');
 const defaultImage = document.getElementById('defaultImage');
 
+/*
+Dès l'instant que l'utilisateur sélectionne un fichier via le champ d'entrée
+la fonction rappel sera exécutée.
+*/
 fileInput.addEventListener('change', function(event) {
   const file = event.target.files[0];
 
+  /*
+  Vérifie si le fichier existe et si son type commence par image/.
+  */
   if (file && file.type.startsWith('image/')) {
+    /*
+    FileReader permet de lire le contenu du fichier sélectionné.
+    */
     const reader = new FileReader();
 
     reader.onload = function() {
@@ -417,6 +453,9 @@ fileInput.addEventListener('change', function(event) {
       document.querySelector('.precisionPoids').style.display = 'none';
     };
 
+    /*
+    Permet de lire le fichier en tant qu'URL, utilisable pour l'affichage de l'image.
+    */
     reader.readAsDataURL(file);
   } else {
     previewImage.src = "";
@@ -441,13 +480,25 @@ croixDeFermetureAjouterImages.addEventListener('click', function() {
 
 previsualisationDesPhotos()
 
-// -------------------------------------------------------------------------
+/*
+Prépare les données d'une image et d'autres champs, puis d'envoyer ces données vers le serveur
+via la requête POST tout en vérifiant si le token est bon.
+*/
 
 async function envoyerImage() {
   let token = JSON.parse (sessionStorage.getItem("token"));
+  /*
+  New formData est un objet FormData vide qui va servir à stocker les informations du formulaire,
+  même les champs.
+  Utilité : collecte et organise les données d'un formulaire de façon appropriée, facilitant également
+  l'envoi.
+  */
   const formData = new FormData()
   formData.append("image", document.getElementById("file").files[0])
   formData.append("title", document.getElementById("ajouteTonTitre").value)
+  /*
+  Permet de transmettre la valeur sélectionné du selected au formulaire.
+  */
   formData.append("category", document.getElementById("menuDeroulantCategories").options[document.getElementById("menuDeroulantCategories").selectedIndex].value)
   const reponse = await fetch("http://localhost:5678/api/works", {
       method: 'POST',
@@ -462,7 +513,6 @@ async function envoyerImage() {
 const modaleAjouterImages = document.getElementById("modaleAjouterImages");
 
 modaleAjouterImages.addEventListener('submit', async function(event) {
-  console.log("test")
   event.preventDefault()
   if(validiteForme()) {
     await envoyerImage()
