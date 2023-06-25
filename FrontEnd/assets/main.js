@@ -65,9 +65,9 @@ async function recuperationCategories() {
 
 function filtrage(categorie, emplacementGallery) {
     let imagesTemporaires = [];
-    let categorieIndex = 0;
-    for (categorieIndex = 0; categorieIndex < images.length; categorieIndex++) {
-        const element = images[categorieIndex];
+    let imagesIndex = 0;
+    for (imagesIndex = 0; imagesIndex < images.length; imagesIndex++) {
+        const element = images[imagesIndex];
         /*
         Si la catégorie et le nom de element === categorie alors ajoute l'image dans
         le tableau imagesTemporaires.
@@ -132,6 +132,9 @@ function vérifierToken() {
         deconnexion.innerText = "Déconnexion";
         deconnexion.setAttribute("class", "deconnexion");
         deconnexion.setAttribute("style", "cursor: pointer")
+        /*
+        Va permettre de remplacer le connexion par déconnexion.
+        */
         login.parentNode.replaceChild(deconnexion, login);
 
         deconnexion.addEventListener('click', function() {
@@ -398,7 +401,7 @@ async function recuperationCategories() {
 
 recuperationCategories()
 /*
-Traite la valeur RESOLUE d'une promesse, comme celle de la ligne 396.
+Traite la valeur RESOLUE d'une promesse, comme celle de la ligne 398.
 */
 .then(categories => {
     const menuDeroulant = document.getElementById('menuDeroulantCategories')
